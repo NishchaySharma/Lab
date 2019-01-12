@@ -1,0 +1,20 @@
+def filter_it(s:str)->str:
+    new_s=''
+    for i in s:
+        if ord(i)>=65 and ord(i)<=90 or ord(i)>=97 and ord(i)<=122: 
+            new_s+=i
+        else:
+            new_s+=' '
+    return new_s
+with open("story.txt","r") as file1, open("keywords.txt","r") as file2:
+    my_hash={}
+    for i in file2:
+        for j in i.split(','):
+            my_hash[j]=0
+    for i in file1:
+        i=filter_it(i)
+        for j in i.split():
+            if j in my_hash:
+                my_hash[j]+=1
+    for k,v in my_hash.items():
+        print('Occurance of',k,' in the story is ',v,'times!')
